@@ -2,13 +2,13 @@ import 'dotenv/config';
 
 import { migrate } from 'drizzle-orm/mysql2/migrator';
 
-import dbConnect from './dbConnect';
+import dbConnect from './connection';
 
 const migration = async () => {
   try {
-    const { connection, db } = await dbConnect();
+    const { connection, DB } = await dbConnect();
 
-    await migrate(db, { migrationsFolder: './migrations' });
+    await migrate(DB, { migrationsFolder: 'src/db/migrations' });
     console.log('Migration completed');
 
     await connection.end();
