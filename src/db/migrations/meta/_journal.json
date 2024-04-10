@@ -15,6 +15,13 @@
       "when": 1712727858036,
       "tag": "0001_sudden_xavin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1712736682951,
+      "tag": "0002_orange_midnight",
+      "breakpoints": true
     }
   ]
 }
