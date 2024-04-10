@@ -1,5 +1,5 @@
 import { env } from '@/common/utils/envConfig';
-import connectDB from '@/db/dbConnect';
+import connectDB from '@/db/connection';
 import { app, logger } from '@/server';
 
 const server = app.listen(env.PORT, () => {
