@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "8dbcd096-b63b-4a60-b621-a037f405032f",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "4c93df0c-a4d0-4b76-9457-800fff937e76",
+  "prevId": "8dbcd096-b63b-4a60-b621-a037f405032f",
   "tables": {
     "vehicleType": {
       "name": "vehicleType",
@@ -56,7 +56,14 @@
           ]
         }
       },
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "vehicleType_type_name_unique": {
+          "name": "vehicleType_type_name_unique",
+          "columns": [
+            "type_name"
+          ]
+        }
+      }
     }
   },
   "schemas": {},

@@ -1,0 +1,1 @@
+ALTER TABLE `vehicleType` ADD CONSTRAINT `vehicleType_type_name_unique` UNIQUE(`type_name`);
