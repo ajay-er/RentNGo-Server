@@ -6,7 +6,7 @@ import { createApiResponse } from '@/api-docs/openAPIResponseBuilders';
 import { commonValidations } from '@/common/utils/commonValidation';
 import { handleServiceResponse, validateRequest } from '@/common/utils/httpHandlers';
 
-import { QueryIdSchema, VehicleSchema, VehicleTypesSchema } from './vehicleModel';
+import { QueryIdSchema, VehicleSchema, VehicleTypesSchema, VehicleWheelsSchema } from './vehicleModel';
 import { vehicleService } from './vehicleService';
 
 export const vehicleRegistry = new OpenAPIRegistry();
@@ -31,10 +31,11 @@ export const vehicleRouter: Router = (() => {
     responses: createApiResponse(z.array(VehicleTypesSchema), 'Success'),
   });
 
-  router.get('/types', async (req: Request, res: Response) => {
+  router.get('/types', validateRequest(VehicleWheelsSchema), async (req: Request, res: Response) => {
     const page = parseInt(req.query.page as string) || 0;
     const limit = parseInt(req.query.limit as string) || 10;
-    const serviceResponse = await vehicleService.findAll(page, limit);
+    const { wheels } = req.body;
+    const serviceResponse = await vehicleService.findAll(wheels, page, limit);
     handleServiceResponse(serviceResponse, res);
   });
 

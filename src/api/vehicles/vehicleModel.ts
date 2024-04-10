@@ -29,3 +29,18 @@ export const QueryIdSchema = z.object({
     typeId: commonValidations.id,
   }),
 });
+
+export const VehicleWheelsSchema = z
+  .object({
+    body: z.object({
+      wheels: z.number(),
+    }),
+  })
+  .refine((data) => data.body.wheels === 4 || data.body.wheels === 2, {
+    message: 'The number of wheels must be either 4 or 2',
+  });
+
+export enum VehicleCategory {
+  Car = 'Car',
+  Bike = 'Bike',
+}

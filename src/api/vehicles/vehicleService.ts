@@ -7,9 +7,9 @@ import { Vehicle, VehicleTypes } from './vehicleModel';
 import { vehicleRepository } from './vehicleRepository';
 
 export const vehicleService = {
-  findAll: async (page: number, limit: number): Promise<ServiceResponse<VehicleTypes[] | null>> => {
+  findAll: async (wheels: number, page: number, limit: number): Promise<ServiceResponse<VehicleTypes[] | null>> => {
     try {
-      const vehiclesTypes = await vehicleRepository.findAllAsync(page, limit);
+      const vehiclesTypes = await vehicleRepository.findAllAsync(wheels, page, limit);
       if (!vehiclesTypes) {
         return new ServiceResponse(ResponseStatus.Failed, 'No Vehicle types found', null, StatusCodes.NOT_FOUND);
       }
