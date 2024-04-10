@@ -9,6 +9,7 @@
     "start": "node dist/index.js",
     "db:generate": "drizzle-kit generate:mysql",
     "db:push": "drizzle-kit push:mysql",
+    "db:seed": "tsx ./src/db/seed.ts",
     "db:migrate": "tsx ./src/db/migrate.ts",
     "db:studio": "drizzle-kit studio --port 2222",
     "clean": "rimraf dist coverage",
