@@ -1,12 +1,14 @@
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import { z } from 'zod';
 
+import { commonValidations } from '@/common/utils/commonValidation';
+
 extendZodWithOpenApi(z);
 
 export type Vehicle = z.infer<typeof VehicleSchema>;
 export const VehicleSchema = z.object({
   id: z.number(),
-  typeId: z.number(),
+  typeId: z.number().nullable(),
   name: z.string(),
   isAvailable: z.boolean(),
   createdAt: z.date(),
@@ -22,7 +24,8 @@ export const VehicleTypesSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const QueryParamsSchema = z.object({
-  page: z.number().optional(),
-  limit: z.number().optional(),
+export const QueryIdSchema = z.object({
+  query: z.object({
+    typeId: commonValidations.id,
+  }),
 });

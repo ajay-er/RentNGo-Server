@@ -3,9 +3,10 @@ import express, { Request, Response, Router } from 'express';
 import { z } from 'zod';
 
 import { createApiResponse } from '@/api-docs/openAPIResponseBuilders';
+import { commonValidations } from '@/common/utils/commonValidation';
 import { handleServiceResponse, validateRequest } from '@/common/utils/httpHandlers';
 
-import { QueryParamsSchema, VehicleSchema, VehicleTypesSchema } from './vehicleModel';
+import { QueryIdSchema, VehicleSchema, VehicleTypesSchema } from './vehicleModel';
 import { vehicleService } from './vehicleService';
 
 export const vehicleRegistry = new OpenAPIRegistry();
@@ -21,14 +22,41 @@ export const vehicleRouter: Router = (() => {
     method: 'get',
     path: '/api/v1/vehicles/types',
     tags: ['Vehicle'],
+    request: {
+      query: z.object({
+        page: commonValidations.pagination,
+        limit: commonValidations.pagination,
+      }),
+    },
     responses: createApiResponse(z.array(VehicleTypesSchema), 'Success'),
   });
 
-  router.get('/types', validateRequest(QueryParamsSchema), async (req: Request, res: Response) => {
+  router.get('/types', async (req: Request, res: Response) => {
     const page = parseInt(req.query.page as string) || 0;
     const limit = parseInt(req.query.limit as string) || 10;
-
     const serviceResponse = await vehicleService.findAll(page, limit);
+    handleServiceResponse(serviceResponse, res);
+  });
+
+  vehicleRegistry.registerPath({
+    method: 'get',
+    path: '/api/v1/vehicles/models',
+    tags: ['Vehicle'],
+    request: {
+      query: z.object({
+        typeId: z.number().openapi({ example: 1 }),
+        page: commonValidations.pagination,
+        limit: commonValidations.pagination,
+      }),
+    },
+    responses: createApiResponse(z.array(VehicleSchema), 'Success'),
+  });
+
+  router.get('/models', validateRequest(QueryIdSchema), async (req: Request, res: Response) => {
+    const typeId = parseInt(req.query.typeId as string);
+    const page = parseInt(req.query.page as string) || 0;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const serviceResponse = await vehicleService.findById(typeId, page, limit);
     handleServiceResponse(serviceResponse, res);
   });
 

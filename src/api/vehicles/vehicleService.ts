@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { ResponseStatus, ServiceResponse } from '@/common/models/serviceResponse';
 import { logger } from '@/server';
 
-import { VehicleTypes } from './vehicleModel';
+import { Vehicle, VehicleTypes } from './vehicleModel';
 import { vehicleRepository } from './vehicleRepository';
 
 export const vehicleService = {
@@ -19,6 +19,20 @@ export const vehicleService = {
         vehiclesTypes,
         StatusCodes.OK
       );
+    } catch (ex) {
+      const errorMessage = `Error finding all vehicle types: $${(ex as Error).message}`;
+      logger.error(errorMessage);
+      return new ServiceResponse(ResponseStatus.Failed, errorMessage, null, StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+  },
+  findById: async (id: number, page: number, limit: number): Promise<ServiceResponse<Vehicle[] | null>> => {
+    try {
+      const vehicles = await vehicleRepository.findbyId(id, page, limit);
+      console.log(vehicles);
+      if (!vehicles) {
+        return new ServiceResponse(ResponseStatus.Failed, 'No Vehicles found', null, StatusCodes.NOT_FOUND);
+      }
+      return new ServiceResponse<Vehicle[]>(ResponseStatus.Success, 'Vehicles found', vehicles, StatusCodes.OK);
     } catch (ex) {
       const errorMessage = `Error finding all vehicle types: $${(ex as Error).message}`;
       logger.error(errorMessage);
