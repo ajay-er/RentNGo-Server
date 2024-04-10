@@ -1,4 +1,3 @@
-import { InferSelectModel } from 'drizzle-orm';
 import { datetime, int, mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
 
 import { vehicles } from './vehicles';
@@ -13,5 +12,3 @@ export const bookings = mysqlTable('bookings', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
 });
-
-export type bookings = InferSelectModel<typeof bookings>;
