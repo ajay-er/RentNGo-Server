@@ -3,7 +3,6 @@ import express, { Request, Response, Router } from 'express';
 import { z } from 'zod';
 
 import { createApiResponse } from '@/api-docs/openAPIResponseBuilders';
-import { commonValidations } from '@/common/utils/commonValidation';
 import { handleServiceResponse, validateRequest } from '@/common/utils/httpHandlers';
 
 import { QueryIdSchema, VehicleSchema, VehicleTypesSchema, VehicleWheelsSchema } from './vehicleModel';
@@ -22,12 +21,6 @@ export const vehicleRouter: Router = (() => {
     method: 'get',
     path: '/api/v1/vehicle/types',
     tags: ['Vehicle'],
-    request: {
-      query: z.object({
-        page: commonValidations.pagination,
-        limit: commonValidations.pagination,
-      }),
-    },
     responses: createApiResponse(z.array(VehicleTypesSchema), 'Success'),
   });
 
@@ -46,8 +39,8 @@ export const vehicleRouter: Router = (() => {
     request: {
       query: z.object({
         typeId: z.number().openapi({ example: 1 }),
-        page: commonValidations.pagination,
-        limit: commonValidations.pagination,
+        // page: commonValidations.pagination,
+        // limit: commonValidations.pagination,
       }),
     },
     responses: createApiResponse(z.array(VehicleSchema), 'Success'),

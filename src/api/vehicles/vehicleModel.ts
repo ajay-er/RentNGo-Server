@@ -33,7 +33,7 @@ export const QueryIdSchema = z.object({
 export const VehicleWheelsSchema = z
   .object({
     body: z.object({
-      wheels: z.number(),
+      wheels: z.number({ required_error: "'wheels' count required" }),
     }),
   })
   .refine((data) => data.body.wheels === 4 || data.body.wheels === 2, {

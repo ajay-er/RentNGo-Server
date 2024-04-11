@@ -28,8 +28,7 @@ export const vehicleService = {
   findById: async (id: number, page: number, limit: number): Promise<ServiceResponse<Vehicle[] | null>> => {
     try {
       const vehicles = await vehicleRepository.findbyId(id, page, limit);
-      console.log(vehicles);
-      if (!vehicles) {
+      if (!vehicles || !vehicles.length) {
         return new ServiceResponse(ResponseStatus.Failed, 'No Vehicles found', null, StatusCodes.NOT_FOUND);
       }
       return new ServiceResponse<Vehicle[]>(ResponseStatus.Success, 'Vehicles found', vehicles, StatusCodes.OK);
