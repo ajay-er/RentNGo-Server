@@ -20,7 +20,7 @@ export const vehicleRouter: Router = (() => {
 
   vehicleRegistry.registerPath({
     method: 'get',
-    path: '/api/v1/vehicles/types',
+    path: '/api/v1/vehicle/types',
     tags: ['Vehicle'],
     request: {
       query: z.object({
@@ -41,7 +41,7 @@ export const vehicleRouter: Router = (() => {
 
   vehicleRegistry.registerPath({
     method: 'get',
-    path: '/api/v1/vehicles/models',
+    path: '/api/v1/vehicle/models',
     tags: ['Vehicle'],
     request: {
       query: z.object({

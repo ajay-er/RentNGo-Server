@@ -7,8 +7,8 @@ export const bookings = mysqlTable('bookings', {
   vehicleId: int('vehicle_id').references(() => vehicles.id),
   firstName: varchar('first_name', { length: 100 }).notNull(),
   lastName: varchar('last_name', { length: 100 }).notNull(),
-  startDate: datetime('start_date'),
-  endDate: datetime('end_date'),
+  startDate: datetime('start_date').notNull(),
+  endDate: datetime('end_date').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
 });
