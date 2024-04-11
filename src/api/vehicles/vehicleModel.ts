@@ -32,11 +32,11 @@ export const QueryIdSchema = z.object({
 
 export const VehicleWheelsSchema = z
   .object({
-    body: z.object({
-      wheels: z.number({ required_error: "'wheels' count required" }),
+    query: z.object({
+      wheels: z.string({ required_error: "'wheels' count required" }),
     }),
   })
-  .refine((data) => data.body.wheels === 4 || data.body.wheels === 2, {
+  .refine((data) => data.query.wheels === '4' || data.query.wheels === '2', {
     message: 'The number of wheels must be either 4 or 2',
   });
 

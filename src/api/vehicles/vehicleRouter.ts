@@ -25,9 +25,9 @@ export const vehicleRouter: Router = (() => {
   });
 
   router.get('/types', validateRequest(VehicleWheelsSchema), async (req: Request, res: Response) => {
+    const wheels = parseInt(req.query.wheels as string);
     const page = parseInt(req.query.page as string) || 0;
     const limit = parseInt(req.query.limit as string) || 10;
-    const { wheels } = req.body;
     const serviceResponse = await vehicleService.findAll(wheels, page, limit);
     handleServiceResponse(serviceResponse, res);
   });
