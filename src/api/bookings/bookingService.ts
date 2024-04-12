@@ -16,7 +16,7 @@ export const bookingService = {
       }
       return new ServiceResponse<Vehicle>(ResponseStatus.Success, 'Vehicle booked!', vehicle, StatusCodes.OK);
     } catch (ex) {
-      const errorMessage = `Error booking vehicle: $${(ex as Error).message}`;
+      const errorMessage = `Error booking vehicle: ${(ex as Error).message}`;
       logger.error(errorMessage);
       return new ServiceResponse(ResponseStatus.Failed, errorMessage, null, StatusCodes.INTERNAL_SERVER_ERROR);
     }

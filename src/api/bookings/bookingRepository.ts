@@ -14,8 +14,8 @@ export const bookingRepository = {
       const [vehicle] = await tx.select().from(vehicles).where(eq(vehicles.id, data.vehicleId));
 
       if (!vehicle || !vehicle.isAvailable) {
-        await tx.rollback();
-        return;
+        // await tx.rollback();
+        throw new Error('Vehicle is not available for booking');
       }
       const startDate = new Date(data.startDate);
       const endDate = new Date(data.endDate);
