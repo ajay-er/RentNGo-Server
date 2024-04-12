@@ -21,6 +21,11 @@ export const vehicleRouter: Router = (() => {
     method: 'get',
     path: '/api/v1/vehicle/types',
     tags: ['Vehicle'],
+    request: {
+      query: z.object({
+        wheels: z.number().openapi({ examples: [2, 4] }),
+      }),
+    },
     responses: createApiResponse(z.array(VehicleTypesSchema), 'Success'),
   });
 
@@ -39,8 +44,6 @@ export const vehicleRouter: Router = (() => {
     request: {
       query: z.object({
         typeId: z.number().openapi({ example: 1 }),
-        // page: commonValidations.pagination,
-        // limit: commonValidations.pagination,
       }),
     },
     responses: createApiResponse(z.array(VehicleSchema), 'Success'),
