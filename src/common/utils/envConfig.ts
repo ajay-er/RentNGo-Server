@@ -7,6 +7,7 @@ export const env = cleanEnv(process.env, {
   NODE_ENV: str({ choices: ['development', 'test', 'production'] }),
   HOST: host(),
   PORT: port(),
+  DATABASE_PORT: port(),
   DATABASE_HOST: str(),
   DATABASE_USERNAME: str(),
   DATABASE_PASSWORD: str(),
