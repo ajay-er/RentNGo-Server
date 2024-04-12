@@ -33,6 +33,22 @@ async function seed() {
       { name: 'Ducati Panigale', typeId: 8 },
       { name: 'Harley-Davidson Road King', typeId: 9 },
       { name: 'Honda Gold Wing', typeId: 10 },
+      { name: 'Audi A4', typeId: 3 },
+      { name: 'Mercedes-Benz E-Class', typeId: 3 },
+      { name: 'Jeep Wrangler', typeId: 2 },
+      { name: 'BMW X5', typeId: 2 },
+      { name: 'Kawasaki Ninja', typeId: 8 },
+      { name: 'Yamaha R1', typeId: 8 },
+      { name: 'Lamborghini Huracan', typeId: 4 },
+      { name: 'Tesla Model S', typeId: 3 },
+      { name: 'Porsche 911', typeId: 4 },
+      { name: 'GMC Sierra', typeId: 5 },
+      { name: 'Subaru Outback', typeId: 2 },
+      { name: 'Harley-Davidson Street Glide', typeId: 9 },
+      { name: 'Indian Scout', typeId: 8 },
+      { name: 'BMW R1250GS', typeId: 10 },
+      { name: 'KTM Adventure', typeId: 10 },
+      { name: 'Honda CR-V', typeId: 2 },
     ]);
 
     console.log(vehicleTypeResult, vehicleResult);
